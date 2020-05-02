@@ -1,0 +1,250 @@
+ {% extends 'base.html' %}
+ {% load static %}
+
+ {% block content %}
+    <section class="banner_area">
+      <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+          <div
+            class="banner_content d-md-flex justify-content-between align-items-center"
+          >
+            <div class="mb-3 mb-md-0">
+              <h2>Yeni məhsul əlavə et</h2>
+              {% comment %} <p>Very us move be blessed multiply night</p> {% endcomment %}
+            </div>
+            <div class="page_link">
+              {% comment %} <a href="index.html">Home</a> {% endcomment %}
+              <a href="checkout.html">Yeni məhsul əlavə et</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="checkout_area section_gap">
+      <div class="container">
+    
+        <div class="billing_details">
+          <div class="row">
+           <div class="col-md-offset-2 col-md-2"></div>
+            <div class="col-md-offset-2 col-md-8">
+              <h3>Məhsul haqqında daha ətraflı</h3>
+              <form
+                class="row contact_form"
+                method="POST"
+                enctype="multipart/form-data"
+              >
+                {% csrf_token %}
+
+                <div class="col-md-6 form-group p_star">
+                  <select class="country_select" name="cat" 
+                    >
+                    {% for val in category %}
+                    <option  value=' {{val.id}}' selected="{val.id=4}">{{val.name}}</option>
+                    {% endfor %}
+                  
+                  </select>
+                  
+                </div>
+                <div class="col-md-6 form-group p_star">
+                  <input 
+                    type="text"
+                    class="form-control"
+                    name="name"
+                    placeholder="Məhsulun adı"
+                    required="required"
+
+                  />
+
+                </div>
+
+                <div class="col-md-6 form-group">
+                
+                  <select  class="country_select" name="brand" required>
+                  <option value="0">Brand</option>
+                    {% for val in brand %}
+                    <option value='{{val.id}}'>{{val.name}}</option>
+                    {% endfor %}
+                    
+                  </select>
+                </div>
+                <div class="col-md-6 form-group">
+                      <div class="file-field">
+                        <div class="btn btn-default btn-sm float-left">
+                          <input   type="file" id="file" class="form-control" id='img-name' name='image' multiple  required>
+                          
+                          <span id="image_pro" style=" display:none; color:red">Məhsul üçün 3 şəkil seçin</span>                   
+                        </div>
+
+                      
+                      </div>
+                </div>
+                <div class="col-md-4 form-group">
+                 <select  required class="country_select" name="dual">
+                  <option value="0" class="p_star" style="content: '*';
+                   color: tomato;"> Sim card
+                  
+                   </option>
+                    {% for val in dual %}
+                    <option value="{{val.id}}">{{val.name}}</option>
+                    {% endfor %}
+                    
+                  </select>
+                
+                </div>
+                <div class="col-md-4 form-group p_star">
+                  <input 
+                    type="text"
+                    class="form-control"
+                    id="memory"
+                    required
+                    name="memory"
+                    placeholder="Yaddaş"
+                  />
+                 
+                </div>
+                <div class="col-md-4 form-group p_star">
+                  <input 
+                    type="color"
+                    class="form-control"
+                    id="color"
+                    required
+                    name="color"
+                    value="#000000"
+                    placeholder="Rəng"
+                  />
+                    <select   hidden class=" " style="display: none"  name="status">
+                          {% for val in status %}
+                          <option value="{{val.id}}" style="display: none"  selected="{val.id=1}">{{val.status}}</option>
+                          {% endfor %}
+                    </select>
+        
+                </div>
+
+                <div class="col-md-12 form-group p_star">
+                  <select required class="country_select" name="os">
+                    <option value="0">Əməliyyat sistemi</option>
+                        {% for val in os %}
+                        <option value="{{val.id}}">{{val.name}}</option>
+                        {% endfor %}
+                  </select>
+                </div>
+                <div class="col-md-12 form-group p_star">
+                  <input 
+                    type="text"
+                    class="form-control"
+                    id="camera"
+                    required
+                    name="camera"
+                    placeholder="Kamera"
+                  />
+                  {% comment %} <span
+                    class="placeholder"
+                    data-placeholder="Camera"
+                  ></span> {% endcomment %}
+                </div>
+                <div class="col-md-12 form-group p_star">
+                  <input 
+                    type="text"
+                    class="form-control"
+                    id="battery"
+                    required
+                    name="battery"
+                    placeholder="Batareya"
+                  />
+                  {% comment %} <span
+                    class="placeholder"
+                    data-placeholder="Battery"
+                  ></span> {% endcomment %}
+                </div>
+                <div class="col-md-12 form-group p_star">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="hearing"
+
+                    required
+                    name="hearing"
+                    placeholder="Eşitmə cihazı"
+                  />
+                  {% comment %} <span class="placeholder" data-placeholder="Hearing Aid Compatibility"></span> {% endcomment %}
+                </div>
+                <div class="col-md-3 form-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="display"
+                    required
+                    name="display"
+                    placeholder="Görüntü"
+                  />
+                </div>
+                 <div class="col-md-3 form-group">
+                  <input
+                    class="form-control"
+                    id="price"
+                    required
+                    name="price"
+                    placeholder="Qiymət"
+                    type="number" min="0" max="10000000000" step="1"
+                  />
+                </div>
+                 <div class="col-md-3 form-group">
+                  <input
+                    class="form-control"
+                    id="quantity"
+                    required
+                    name="quantity"
+                    placeholder="Say"
+                    type="number" min="0" max="50" step="1"
+                  />
+                </div>
+                  <div class="col-md-3 form-group">
+                  <select class="currency"  required name="currency">
+                        <option value="0">Valyuta</option>
+                        <option value="$" selected="selected" >USD</option>
+                        <option value="€">EUR</option>
+                        <option value="£">DBP</option>
+                        <option value="DA">DZD</option>
+                        <option value="AZE">AZE</option>
+                  </select>
+                </div>
+                
+                <div class="col-md-12 form-group">
+                  <div class="creat_account">
+                    <h3>Açıqlama</h3>
+                    
+                  </div>
+                  <textarea
+                    class="form-control"
+                    name="description"
+                    id="description"
+                    rows="1"
+                    required
+                    placeholder="About product . . ."
+                  ></textarea>
+                </div>
+                <br>
+                 <div class="col-md-12 form-group">  
+                  <button type="submit" value="submit" class="btn submit_btn float-right">
+                    Məhsul yarat
+                     </button>
+                    
+                </div>
+              
+              </form>
+            </div>
+          <div class="col-md-offset-2 col-md-2">
+          
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+ {% endblock content %}    
+
+
+    
+      
+   
+ 

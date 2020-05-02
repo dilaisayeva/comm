@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load socialaccount %}
+{% providers_media_js %}
+
+{% block content %}
+{% csrf_token %}
+<br>
+<div class="container">
+    <div class="jumbotron col-lg-6 col-md-6 col-sm-6 col-xs-6 offset-3 float-md-center" style="width: 50%;">
+            <a href="{% provider_login_url "google" %}" class="google btn" style="color: white;">
+              <i class="fa fa-google fa-fw"></i> Login with Google+
+                
+                  </a>
+                
+                  <a href="{% provider_login_url "facebook" method="js_sdk" %}" class="fb btn" style="color: white;">
+                    <i class="fa fa-facebook fa-fw"> </i>Login with Facebook
+
+                  </a>
+    </div>
+</div>
+{% endblock content  %}

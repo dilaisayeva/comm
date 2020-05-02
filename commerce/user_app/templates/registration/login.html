@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% load socialaccount %}
+{% providers_media_js %}
+
+{% block content %}
+<div class="card">
+<div class="card-body">
+
+<div class="row">
+<div class='col-4'>
+</div>
+<div class='col-4'>
+<h4 class="card-title">Log in to your account</h4>
+<form method="post"  >
+{% csrf_token %}
+<input type="hidden" name="next" value="{{ next }}">
+{{ form|crispy }}
+<div class="row">
+      <div class='col-6'>
+            <a href="{% provider_login_url "google" %}" class="google btn" style="color: white;">
+              <i class="fa fa-google fa-fw"></i> Login with Google+
+                
+                  </a>
+        </div>        
+        <div class='col-6'>
+        <a href="{% provider_login_url "facebook" method="js_sdk" %}" class="fb btn"          style="color: white;">
+          <i class="fa fa-facebook fa-fw"> </i>Login with Facebook
+
+      </a>
+    </div>       
+    </div>
+    <br>
+    <a href="{% url 'user:signup' %}"  style="text-decoration: underline; font-size: 20px" >If you are not registered yet please signup</a>
+    <br>
+    <br>
+
+    <button type="submit" class="btn btn-primary btn-block">Log in</button>
+</form>
+</div>
+<div class='col-4'>
+</div>
+</div>
+</div>
+</div>
+{% endblock content %}
+

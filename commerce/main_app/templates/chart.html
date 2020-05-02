@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  
+   
+    <section class="banner_area">
+      <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+          <div
+            class="banner_content d-md-flex justify-content-between align-items-center"
+          >
+            <div class="mb-3 mb-md-0">
+              <h2>Səbət</h2>
+              {% comment %} <p>Very us move be blessed multiply night</p> {% endcomment %}
+            </div>
+            <div class="page_link">
+              <a href="index.html">Baş səhifə</a>
+              <a href="cart.html">Səbət</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cart_area"> 
+      <form action="" method="post"   enctype="multipart/form-data">
+    
+       {% csrf_token %}
+      <div class="container">
+        <div class="cart_inner">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Məhsul</th>
+                  <th scope="col">Qiymət</th>
+                  <th scope="col">Say</th>
+                  <th scope="col">Toplam qiymət</th>
+                </tr>
+              </thead>
+             
+              <tbody>
+              {% comment %} <input name="product"  value="21" /> {% endcomment %}
+              {% for i  in chart  %}
+                <tr >
+                  <td>
+                    <div class="media">
+                      <div class="d-flex">
+                        <img
+                          src="{{i.product.picture.url}}"
+                          alt=""
+                        />
+                      </div>
+                      <div class="media-body">
+                        <p>{{i.product.description}}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <h5>{{i.product.currency}}{{i.product.price}}</h5>
+                  </td>
+                  <td >
+                    <div class="product_count">
+                      <input name="product" hidden value="{{i.product.id}}"/>
+                      <input readonly
+                        type="text"
+                        name="quantity"
+                        data-price="{{i.product.price}}"
+                        id="{{i.product.id}}-sst"
+                        maxlength="12"
+                        value="{{i.quantity}}"
+                        title="Quantity:"
+                        class="input-text qty"
+                        style="background-color:white"
+                        data-quantity="{{i.product.quantity}} " 
+                      />
+                      <button 
+                        onclick="var result = document.getElementById('{{i.product.id}}-sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst < {{i.product.quantity}} ) result.value++;return false;"
+                        class="increase items-count"
+                        type="button"
+                      >
+                        <i class="lnr lnr-chevron-up"></i>
+                      </button>
+                      <button 
+                        onclick="var result = document.getElementById('{{i.product.id}}-sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 1 ) result.value--;return false;"
+                        class="reduced items-count"
+                        type="button"
+                      >
+                        <i class="lnr lnr-chevron-down"></i>
+                      </button>
+                    </div>
+                  </td>
+                  
+                  <td class="salam">
+                 <input class="total" style="border:0;outline:0;"  name="total" 
+                  value="{{i.total}}" readonly placeholder="salam"   data-currency="{{i.product.currency}}"/> 
+
+                  </td>
+                </tr>
+                {% endfor %}
+                <tr >
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <h5>Subtotal</h5>
+                  </td>
+                  <td class="" >
+                    <h5 class="subtotal_val">${{subTotal}}</h5>
+                  </td>
+                </tr>
+
+                <tr class="shipping_area">
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <!-- <h5>Shipping  </h5> -->
+                  </td>
+                  <td>
+                    <div class="shipping_box">
+                        <select class="shipping_select" name="shipping">
+                            {% comment %} <option selected value="5.0">Flat rate: $5.00</option> {% endcomment %}
+                            <option value="10.0">Sabit qiymət: $10.00</option>
+                            <option value="2.0">Yerli çatdırılma : $2.00</option> 
+                            <option value="0">Pulsuz çatdırılma</option> 
+
+                          </select>
+                      <h6>
+                       Ümumi xərci hesablayın
+
+                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                      </h6>
+                      <select class="shipping_select" name="country">
+                        <option selected value="Azerbaijan">Azerbaijan</option>
+                      </select>
+                      <select name="state" class="shipping_select">
+                        <option value="Baku">Baku</option>
+                        <option value="Gakh">Gakh</option>
+                        <option value="Zaqatala">Zaqatala</option>
+                      </select>
+                      <input type="text" name="postcode" placeholder="Postcode/Zipcode" />
+                    </div>
+                  </td>
+                </tr>
+                <tr class="out_button_area">
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <div class="checkout_btn_inner" style="float: right;">
+
+                      <button   class="btn submit_btn"  type="submit">
+                   
+                        Davam et 
+                       
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      </form>
+
+    </section>
+{% endblock content %}
+   
+   

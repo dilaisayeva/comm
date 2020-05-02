@@ -1,0 +1,254 @@
+  {% extends 'base.html' %}
+  {% load static %}
+   {% block content %}
+          <form
+            method="POST"
+          
+          >   {% csrf_token %}
+           <section class="checkout_area section_gap">
+     
+      <div class="container">
+          
+       
+        <div class="billing_details">
+          <div class="row">
+            <div class="col-lg-8">
+              <h3>Ödəmə məlumatları</h3>
+              <form
+                class="row contact_form"
+                action="#"
+                 id="form1"
+                novalidate="novalidate"
+              >
+                <div class="col-md-5 form-group p_star">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="first"
+                    name="firstname"
+                    placeholder="   Ad"
+                  />
+                  <span
+                    class="placeholder"
+                    data-placeholder=""
+                  ></span>
+                </div>
+                <div class="col-md-5 form-group p_star">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="last"
+                    name="lastname"
+                    placeholder="   Soyad"
+                  />
+                  <span class="placeholder" data-placeholder=""></span>
+                </div>
+                <div class="col-md-10 form-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="company"
+                    name="company"
+                    placeholder="Şirkət adı"
+                  />
+                </div>
+                <div class="col-md-5 form-group p_star">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="number"
+                    name="phone"
+                    placeholder="   Telefon nömrəsi"
+                  />
+                  <span
+                    class="placeholder"
+                    data-placeholder=""
+                  ></span>
+                </div>
+                <div class="col-md-5 form-group p_star">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    placeholder="   Email adresi"
+                  />
+                  <span
+                    class="placeholder"
+                    data-placeholder=""
+                  ></span>
+                </div>
+                <div class="col-md-6 form-group p_star">
+                  <select class="country_select form-group" style="width:2000px" name="country">
+                    <option value="Azerbaijan">Azerbaycan             </option>
+                    <option value="Turkey">Turkiyə      </option>
+                    
+                  </select>
+                      
+                </div>
+                <div class="col-md-10 form-group p_star">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="add1"
+                    name="address_01"
+                    placeholder="   Adres 1"
+                  />
+                  <span
+                    class="placeholder"
+                    data-placeholder=" "
+                  ></span>
+                </div>
+                <div class="col-md-10 form-group p_star">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="add2"
+                    name="address_02"
+                    placeholder="   Adres  2"
+                  />
+                  <span
+                    class="placeholder"
+                    data-placeholder=""
+                  ></span>
+                </div>
+                <div class="col-md-10 form-group p_star">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="city"
+                    name="city"
+                    placeholder="   Şəhər"
+                  />
+                  <span class="placeholder" data-placeholder=" "></span>
+                </div>
+                <div class="col-md-10 form-group p_star">
+                   <input
+                    type="text"
+                    class="form-control"
+                    id="city"
+                    name="district"
+                    placeholder="   Küçə"
+                  />
+                  <span class="placeholder" data-placeholder=" "></span>
+                </div>
+                <div class="col-md-10 form-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="zip"
+                    name="postcode"
+                    placeholder="Postkod"
+                  />
+                </div>
+                <div class="col-md-10 form-group">
+                  <div class="creat_account">
+                    <input type="checkbox" id="f-option2" name="selector" />
+                    {% comment %} <label for="f-option2">Create an account?</label> {% endcomment %}
+                  </div>
+                </div>
+                <div class="col-md-10 form-group">
+                  <div class="creat_account">
+                    {% comment %} <h3>Shipping Details</h3> {% endcomment %}
+                    <input type="checkbox" id="f-option3" name="selector" />
+                    {% comment %} <label for="f-option3">Ship to a different address?</label> {% endcomment %}
+                  </div>
+                  <textarea
+                    class="form-control"
+                    name="message"
+                    id="message"
+                    rows="1"
+                    placeholder="Sifariş haqqında məlumatlar" style="height:120px"
+                  ></textarea>
+                </div>
+                
+              </form>
+            </div>
+            <div class="col-lg-4">
+              <div class="order_box">
+                <h2>Sifariş listi</h2>
+                <ul class="list">
+                  <li>
+                    <a href="#"
+                      >Məhsul
+                      <span>Məbləğ</span>
+                    </a>
+                  </li>
+                  {% for i in chart  %}
+                  <li>
+                    <a href="#"
+                      >{{i.product.name}}
+                      <span class="middle">x 0{{i.quantity}}</span>
+                      <span class="last">{{i.product.currency}}{{i.product.price}}</span>
+                    </a>
+                  </li>
+                {% endfor %}
+                </ul>
+                <ul class="list list_2">
+                  <li>
+                    <a href="#"
+                      >Ümumi məbləğ
+                      <span>${{subtotal}}</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#"
+                      >Çatdırılma 
+                      <span>${{shipping}}</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#"
+                      >Son məbləğ
+                      <span class="total_price">${{total}}</span>
+                    </a>
+                  </li>
+                </ul>
+                <div class="payment_item">
+                  <div class="radion_btn">
+                    <input type="radio" id="f-option5" name="selector" />
+                    <label for="f-option5">Ödəməni yoxla</label>
+                    <div class="check"></div>
+                  </div>
+                  <p>
+                  Zəhmət olmasa ünvanınızı dəqiqləşdirib sonra qeyd edin
+
+                  </p>
+                </div>
+                <div class="payment_item active">
+                  <div class="radion_btn">
+                    <input type="radio" id="f-option6" name="selector" />
+                    <label for="f-option6">Paypal </label>
+                    <img src="img/product/single-product/card.jpg" alt="" />
+                    <div class="check"></div>
+                  </div>
+                  <p>
+                      Zəhmət olmasa ünvanınızı dəqiqləşdirib sonra qeyd edin
+                  </p>
+                </div>
+                <div class="creat_account">
+                  <input type="checkbox" id="f-option4" name="selector" />
+                  <label for="f-option4">Oxudum və qəbul edirəm </label>
+                  <a href="#">qaydalar & şərtlər*</a>
+                </div>
+                   <div class="creat_account"  >
+                   
+                     <div id="paypal-button-container"></div>
+
+                <!-- Include the PayPal JavaScript SDK -->
+                <script src="https://www.paypal.com/sdk/js?client-id=AYGUNrthKh8QILidMThCqOESDLR4DG50hpyDWspbkPLrc8v29kddwWF0YMP_lg8Rq3psbLyTUNtHkPve&currency=USD"></script>
+
+              
+               </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+  
+     </form>
+      
+   {% endblock content %} 
+        
